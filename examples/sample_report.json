@@ -1,0 +1,78 @@
+{
+  "SchemaVersion": 1,
+  "ToolVersion": "1.0.0",
+  "Mode": "Demo",
+  "CollectedAtUtc": "2026-10-13T08:00:00Z",
+  "Summary": {
+    "Pass": 4,
+    "Fail": 1,
+    "Warning": 2,
+    "Unknown": 1
+  },
+  "Findings": [
+    {
+      "Id": "WSA-01",
+      "Title": "Firewall profiles",
+      "Status": "Fail",
+      "Severity": "High",
+      "Evidence": "Disabled profiles: Public.",
+      "Guidance": "Enable the Domain, Private and Public firewall profiles. Review effective rules separately."
+    },
+    {
+      "Id": "WSA-02",
+      "Title": "Microsoft Defender protection",
+      "Status": "Pass",
+      "Severity": "High",
+      "Evidence": "Defender is in Normal mode with antivirus and real-time protection enabled.",
+      "Guidance": "Review Windows Security and your approved antivirus product. Passive Defender can be intentional with another antivirus; this tool does not validate that product."
+    },
+    {
+      "Id": "WSA-03",
+      "Title": "System drive BitLocker",
+      "Status": "Unknown",
+      "Severity": "High",
+      "Evidence": "Collection failed: Synthetic example: access denied by provider.",
+      "Guidance": "Review system-drive encryption and protection in BitLocker settings. Back up recovery keys securely before changing protection."
+    },
+    {
+      "Id": "WSA-04",
+      "Title": "User Account Control",
+      "Status": "Pass",
+      "Severity": "High",
+      "Evidence": "EnableLUA=1; admin prompt=5; secure desktop=1. A restart may be needed after policy changes.",
+      "Guidance": "Review UAC policy: enable Admin Approval Mode and prompts on the secure desktop. This check does not inspect standard-user or built-in Administrator policies."
+    },
+    {
+      "Id": "WSA-05",
+      "Title": "Remote Desktop configuration",
+      "Status": "Warning",
+      "Severity": "Medium",
+      "Evidence": "Local RDP configuration allows connections with NLA. Confirm that remote access is intended and review effective policy.",
+      "Guidance": "Disable Remote Desktop when unused. If needed, require NLA and review policy overrides, firewall scope and access groups. Registry settings alone do not establish network reachability."
+    },
+    {
+      "Id": "WSA-06",
+      "Title": "SMBv1 server protocol",
+      "Status": "Pass",
+      "Severity": "High",
+      "Evidence": "EnableSMB1Protocol=False on the SMB server; client state is not assessed.",
+      "Guidance": "Disable the SMBv1 server protocol after reviewing legacy dependencies. This check covers the server configuration only; the SMBv1 client and optional feature need separate review."
+    },
+    {
+      "Id": "WSA-07",
+      "Title": "Built-in local Guest account",
+      "Status": "Pass",
+      "Severity": "Medium",
+      "Evidence": "Built-in local Guest account (RID 501) is disabled.",
+      "Guidance": "Disable the built-in local Guest account unless an approved workflow explicitly requires it. Other local accounts and group memberships are outside this check."
+    },
+    {
+      "Id": "WSA-08",
+      "Title": "PowerShell script block logging policy",
+      "Status": "Warning",
+      "Severity": "Low",
+      "Evidence": "Explicit HKLM policies: Windows PowerShell=1; PowerShell Core=0 (0 includes absent values). Other policy paths may still enable logging.",
+      "Guidance": "Review script block logging for both Windows PowerShell and PowerShell 7. This checks explicit HKLM policies only; HKCU settings, Core policy inheritance, log retention and event delivery are not assessed. Logged script content can contain secrets."
+    }
+  ]
+}

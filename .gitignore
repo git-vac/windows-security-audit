@@ -1,0 +1,5 @@
+reports/*
+!reports/.gitkeep
+*.log
+.DS_Store
+Thumbs.db

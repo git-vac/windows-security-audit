@@ -1,0 +1,32 @@
+name: PowerShell checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Run regression suite
+        shell: ${{ matrix.shell }}
+        run: ./tests/Run-Tests.ps1
+      - name: Demo HTML smoke test
+        shell: ${{ matrix.shell }}
+        run: ./Invoke-SecurityAudit.ps1 -Demo -Format Html -OutputPath ./reports/demo.html
+  portable-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Run portable regression suite
+        shell: pwsh
+        run: ./tests/Run-Tests.ps1

@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 1,
+  "Mode": "Demo",
+  "CollectedAtUtc": "2026-10-13T08:00:00Z",
+  "Sources": {
+    "Firewall": {"Available": true, "Data": [
+      {"Name": "Domain", "Enabled": 1},
+      {"Name": "Private", "Enabled": 1},
+      {"Name": "Public", "Enabled": 0}
+    ]},
+    "Defender": {"Available": true, "Data": {"AMRunningMode": "Normal", "AntivirusEnabled": true, "RealTimeProtectionEnabled": true}},
+    "BitLocker": {"Available": false, "Data": null, "Error": "Synthetic example: access denied by provider."},
+    "Uac": {"Available": true, "Data": {"EnableLUA": 1, "ConsentPromptBehaviorAdmin": 5, "PromptOnSecureDesktop": 1}},
+    "Rdp": {"Available": true, "Data": {"DenyConnections": 0, "NlaRequired": 1}},
+    "Smb1": {"Available": true, "Data": {"ServerEnabled": false}},
+    "Guest": {"Available": true, "Data": {"Enabled": false}},
+    "Logging": {"Available": true, "Data": {"WindowsPowerShell": 1, "PowerShellCore": 0}}
+  }
+}
