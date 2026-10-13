@@ -10,17 +10,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shell: [powershell, pwsh]
+        engine: [powershell, pwsh]
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Run regression suite
-        shell: ${{ matrix.shell }}
-        run: ./tests/Run-Tests.ps1
+        shell: pwsh
+        run: |
+          & ${{ matrix.engine }} -NoProfile -File ./tests/Run-Tests.ps1
+          exit $LASTEXITCODE
       - name: Demo HTML smoke test
-        shell: ${{ matrix.shell }}
-        run: ./Invoke-SecurityAudit.ps1 -Demo -Format Html -OutputPath ./reports/demo.html
+        shell: pwsh
+        run: |
+          & ${{ matrix.engine }} -NoProfile -File ./Invoke-SecurityAudit.ps1 -Demo -Format Html -OutputPath ./reports/demo.html
+          exit $LASTEXITCODE
   portable-demo:
     runs-on: ubuntu-latest
     steps:
