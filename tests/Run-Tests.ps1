@@ -188,3 +188,5 @@ try {
     }
 }
 Write-Output "Passed $script:count assertions."
+# Expected failing CLI subprocesses leave LASTEXITCODE=1. Report suite success explicitly.
+exit 0
